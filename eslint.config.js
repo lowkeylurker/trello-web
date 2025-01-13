@@ -24,6 +24,7 @@ export default [
       'react-refresh': reactRefresh
     },
     rules: {
+      // React
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
@@ -34,6 +35,7 @@ export default [
         { allowConstantExport: true }
       ],
 
+      // Common
       'no-console': 1,
       'no-lonely-if': 1,
       'no-unused-vars': 1,
@@ -51,7 +53,15 @@ export default [
       'keyword-spacing': 1,
       'comma-dangle': 1,
       'comma-spacing': 1,
-      'arrow-spacing': 1
+      'arrow-spacing': 1,
+
+      // MUI
+      'no-restricted-imports': [
+        'error',
+        {
+          'patterns': ['@mui/*/*/*']
+        }
+      ]
     }
   }
 ]

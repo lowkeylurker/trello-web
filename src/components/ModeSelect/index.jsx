@@ -39,7 +39,7 @@ function ModeSelect() {
         <MenuItem value="system">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <SettingsBrightnessOutlinedIcon fontSize='small'/> System
-          </div> 
+          </div>
         </MenuItem>
       </Select>
     </FormControl>

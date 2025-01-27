@@ -18,7 +18,8 @@ function Card({ card }) {
     // touchAction: 'none', // use for PointerSensor default sensor
     transform: CSS.Translate.toString(transform), // Not use CSS.Transform => stretch column bug
     transition,
-    opacity: isDragging ? 0.5 : undefined
+    opacity: isDragging ? 0.5 : undefined,
+    border: isDragging ? '1px solid #2ecc71' : undefined
   }
 
   const shouldShowCardAction = () => {

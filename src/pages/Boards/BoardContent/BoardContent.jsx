@@ -30,7 +30,7 @@ const ACTIVE_DRAG_ITEM_TYPE = {
   CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
 
-function BoardContent({ board, createNewColumn, createNewCard }) {
+function BoardContent({ board, createNewColumn, createNewCard, moveColumns }) {
   // the mouse should move 10px to activate event, this will fix the bug of activating event when clicking
   // if use pointerSensor => set touchAction = none at draggable elements, but still have bugs when dragging
   // const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
@@ -138,7 +138,7 @@ function BoardContent({ board, createNewColumn, createNewCard }) {
     }
   }
 
-  const handleDragEnd = (event) => {
+  const handleDragEnd = async (event) => {
     const { active, over } = event
 
     if (!active || !over) return
@@ -173,8 +173,9 @@ function BoardContent({ board, createNewColumn, createNewCard }) {
         const oldColumnIndex = orderedColumns.findIndex(c => c._id === active.id)
         const newColumnIndex = orderedColumns.findIndex(c => c._id === over.id)
         const dndOrderedColumns = arrayMove(orderedColumns, oldColumnIndex, newColumnIndex)
-        // const dndOrderdedColumnsIds = dndOrderedColumns.map(c => c._id)
         setOrderedColumns(dndOrderedColumns)
+
+        await moveColumns(dndOrderedColumns)
       }
     }
 

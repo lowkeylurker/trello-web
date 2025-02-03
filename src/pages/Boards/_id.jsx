@@ -28,13 +28,16 @@ function Board() {
     const boardId = '6799f30245da0a7a6c1f4783'
     fetchBoardDetailsAPI(boardId)
       .then(board => {
+        // Sắp xếp thứ tự các column luôn trước khi đưa dữ liệu xuống các component con
         board.columns = mapOrder(board.columns, board.columnOrderIds, '_id')
 
         board.columns.forEach(column => {
+          // Xử lý vấn đề kéo thả vào column rỗng khi F5 trang web
           if (isEmpty(column.cards)) {
             column.cards = [generatePlaceholderCard(column)]
             column.cardOrderIds = [generatePlaceholderCard(column)._id]
           } else {
+            // Sắp xếp thứ tự các column luôn trước khi đưa dữ liệu xuống các component con
             column.cards = mapOrder(column.cards, column.cardOrderIds, '_id')
           }
         })

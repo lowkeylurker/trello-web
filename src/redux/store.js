@@ -2,5 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { activeBoardReducer } from './activeBoard/activeBoardSlice'
 
 export const store = configureStore({
-  reducer: { activeBoardReducer }
+  reducer: {
+    activeBoard: activeBoardReducer
+  }
 })

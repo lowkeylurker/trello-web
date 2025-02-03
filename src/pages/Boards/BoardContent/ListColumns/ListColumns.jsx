@@ -8,8 +8,20 @@ import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
+import { createNewColumnAPI } from '~/apis'
+import { generatePlaceholderCard } from '~/utils/formatters'
+import { cloneDeep } from 'lodash'
 
-function ListColumns({ columns, createNewColumn, createNewCard, deleteColumnDetails }) {
+import {
+  updateCurrentActiveBoard,
+  selectCurrentActiveBoard
+} from '~/redux/activeBoard/activeBoardSlice'
+import { useDispatch, useSelector } from 'react-redux'
+
+function ListColumns({ columns }) {
+  const dispatch = useDispatch()
+  const board = useSelector(selectCurrentActiveBoard)
+
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
   const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
 
@@ -22,11 +34,38 @@ function ListColumns({ columns, createNewColumn, createNewCard, deleteColumnDeta
     }
 
     // Call API...
-    const newColumnData = {
-      title: newColumnTitle
-    }
-    await createNewColumn(newColumnData)
+    const newColumnData = { title: newColumnTitle }
 
+    const createdColumn = await createNewColumnAPI({
+      ...newColumnData,
+      boardId: board._id
+    })
+
+    createdColumn.cards = [generatePlaceholderCard(createdColumn)]
+    createdColumn.cardOrderIds = [generatePlaceholderCard(createdColumn)._id]
+
+    /**
+     * Đoạn này bị lỗi not extensible do spread operator là shallow copy
+     * => vi phạm rules Immutability (bất biến) của Redux Toolkit
+     * => không dùng push() được
+     *  Cách 1: dùng deep copy
+    */
+    // const newBoard = { ...board }
+    const newBoard = cloneDeep(board)
+    newBoard.columns.push(createdColumn)
+    newBoard.columnOrderIds.push(createdColumn._id)
+
+    /**
+     * Cách 2: dùng array.concat() thay cho push() vì push thay đổi mảng trực tiếp, còn concat() thì merge mảng lại và tạo mảng mới
+     */
+    // const newBoard = { ...board }
+    // newBoard.columns = newBoard.columns.concat([createdColumn])
+    // newBoard.columnOrderIds = newBoard.columnOrderIds.concat([createdColumn._id])
+
+    // Cập nhật dữ liệu Board vào Redux Store
+    dispatch(updateCurrentActiveBoard(newBoard))
+
+    // Đóng form thêm Column mới và xóa dữ liệu input
     setOpenNewColumnForm(false)
     setNewColumnTitle('')
   }
@@ -42,12 +81,7 @@ function ListColumns({ columns, createNewColumn, createNewCard, deleteColumnDeta
         overflowY: 'hidden',
         '&::-webkit-scrollbar-track': { m: 2 }
       }}>
-        {columns?.map(column => <Column
-          key={column._id}
-          column={column}
-          createNewCard={createNewCard}
-          deleteColumnDetails={deleteColumnDetails}
-        />)}
+        {columns?.map(column => <Column key={column._id} column={column} />)}
 
         {!openNewColumnForm
           ? <Box onClick={toggleOpenNewColumnForm} sx={{

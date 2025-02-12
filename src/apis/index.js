@@ -45,6 +45,6 @@ export const registerUserAPI = async (data) => {
 
 export const verifyUserAPI = async (data) => {
   const response = await authorizedAxiosInstance.put(`${API_ROOT}/v1/users/verify`, data)
-  toast.success('Account created successfully! Now you can login to enjoy our services! Have a good day!', { theme: 'colored' })
+  toast.success('Account verified successfully! Now you can login to enjoy our services! Have a good day!', { theme: 'colored' })
   return response.data
 }

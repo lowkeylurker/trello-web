@@ -1,11 +1,22 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+/* eslint-disable react/prop-types */
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 
 import Board from './pages/Boards/_id'
 import NotFound from './pages/404/NotFound'
 import Auth from './pages/Auth/Auth'
 import AccountVerification from './pages/Auth/AccountVerification'
 
+import { useSelector } from 'react-redux'
+import { selectCurrentUser } from '~/redux/user/userSlice'
+
+const ProtectedRoute = ({ user }) => {
+  if (!user) return <Navigate to='/login' replace={true} />
+  return <Outlet /> // Hiển thị các Child Route
+}
+
 function App() {
+  const currentUser = useSelector(selectCurrentUser)
+
   return (
     <Routes>
       {/* Redirect Route */}
@@ -15,13 +26,16 @@ function App() {
         <Navigate to='/boards/6799f30245da0a7a6c1f4783' replace={true} />
       } />
 
-      {/* Board Details */}
-      <Route path='/boards/:boardId' element={<Board />}/>
+      {/* Protected Route: những route chỉ cho truy cập sau khi login */}
+      <Route element={<ProtectedRoute user={currentUser} />}>
+        {/* Board Details */}
+        <Route path='/boards/:boardId' element={<Board />}/>
+      </Route>
 
       {/* Authenticaton */}
       <Route path='/login' element={<Auth />} />
       <Route path='/register' element={<Auth />} />
-      <Route path='account/verification' element={<AccountVerification />} />
+      <Route path='/account/verification' element={<AccountVerification />} />
 
       {/* 404 not found page */}
       <Route path='*' element={<NotFound />} />

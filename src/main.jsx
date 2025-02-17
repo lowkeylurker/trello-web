@@ -23,6 +23,9 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 const persistor = persistStore(store)
 
+// Kỹ thuật Inject Store: là kỹ thuật khi cần sử dụng biến redux store ở các file ngoài phạm vi component như file authorizedAxios hiện tại
+import { injectStore } from './utils/authorizedAxios.js'
+injectStore(store)
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter basename='/' >

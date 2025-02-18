@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client'
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles'
 import theme from './theme.js'
 import { CssBaseline } from '@mui/material'
+import GlobalStyles from '@mui/material/GlobalStyles'
 import App from './App.jsx'
 
 // Config toast
@@ -38,6 +39,7 @@ createRoot(document.getElementById('root')).render(
             cancellationButtonProps: { color: 'inherit' },
             allowClose: false
           }}>
+            <GlobalStyles styles={{ a: { textDecoration: 'none' } }} />
             <CssBaseline />
             <App />
             <ToastContainer position='bottom-left' theme='colored' />

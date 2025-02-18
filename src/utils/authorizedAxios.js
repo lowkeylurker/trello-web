@@ -53,7 +53,6 @@ authorizedAxiosInstance.interceptors.response.use(
     // Đầu tiên lấy được các request API đang bị lỗi thông qua error.config
     const originalRequests = error.config
     if (error.response?.status === 410 && originalRequests) {
-
       // Kiểm tra xem nếu chưa có refreshTokenPromise thì thực hiện gán việc gọi API refresh_token đồng thời gán vào refreshTokenPromise
       if (!refreshTokenPromise) {
         refreshTokenPromise = refreshTokenAPI()

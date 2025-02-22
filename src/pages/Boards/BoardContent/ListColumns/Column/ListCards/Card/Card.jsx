@@ -10,9 +10,13 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { useDispatch } from 'react-redux'
+import { updateCurrentActiveCard } from '~/redux/activeCard/activeCardSlice'
 
 
 function Card({ card }) {
+  const dispatch = useDispatch()
+
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: card._id, data: { ...card } })
   const dndKitCardStyles = {
     // touchAction: 'none', // use for PointerSensor default sensor
@@ -26,8 +30,14 @@ function Card({ card }) {
     return !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length
   }
 
+  const setActiveCard = () => {
+    // Cập nhật data cho cái activeCard trong Redux
+    dispatch(updateCurrentActiveCard(card))
+  }
+
   return (
     <MuiCard
+      onClick={setActiveCard}
       sx={{
         cursor: 'pointer',
         boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',

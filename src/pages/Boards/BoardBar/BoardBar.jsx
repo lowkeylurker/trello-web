@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip'
 import avatar from '~/assets/avatar.jpg'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import { capitalizeFirstLetter } from '~/utils/formatters'
+import BoardUserGroup from './BoardUserGroup'
 
 const MENU_STYLES = {
   color: 'white',
@@ -90,46 +91,8 @@ function BoardBar({ board }) {
           Invite
         </Button>
 
-        <AvatarGroup
-          max={4}
-          sx={{
-            gap: '10px',
-            '& .MuiAvatar-root': {
-              width: 30,
-              height: 30,
-              fontSize: 16,
-              border: 'none',
-              color: 'white',
-              cursor: 'pointer',
-              '&:first-of-type': { bgcolor: '#a4b0be' }
-            }
-          }}
-        >
-          <Tooltip title='Levion'>
-            <Avatar alt="Levion" src={avatar} />
-          </Tooltip>
-          <Tooltip title='Levion'>
-            <Avatar alt="Levion" src={avatar} />
-          </Tooltip>
-          <Tooltip title='Levion'>
-            <Avatar alt="Levion" src={avatar} />
-          </Tooltip>
-          <Tooltip title='Levion'>
-            <Avatar alt="Levion" src={avatar} />
-          </Tooltip>
-          <Tooltip title='Levion'>
-            <Avatar alt="Levion" src={avatar} />
-          </Tooltip>
-          <Tooltip title='Levion'>
-            <Avatar alt="Levion" src={avatar} />
-          </Tooltip>
-          <Tooltip title='Levion'>
-            <Avatar alt="Levion" src={avatar} />
-          </Tooltip>
-          <Tooltip title='Levion'>
-            <Avatar alt="Levion" src={avatar} />
-          </Tooltip>
-        </AvatarGroup>
+        {/* Xử lý hiển thị danh sách thành viên của board */}
+        <BoardUserGroup />
       </Box>
     </Box>
   )

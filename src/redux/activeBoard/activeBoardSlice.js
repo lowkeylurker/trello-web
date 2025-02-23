@@ -36,6 +36,21 @@ export const activeBoardSlice = createSlice({
 
       // Update dữ liệu của currentActiveBoard
       state.currentActiveBoard = board
+    },
+
+    updateCardInBoard: (state, action) => {
+      // Update nested data
+      const incomingCard = action.payload
+
+      // Tìm dần từ board > column > card
+      const column = state.currentActiveBoard.columns.find(item => item._id === incomingCard.columnId)
+      if (column) {
+        const card = column.cards.find(item => item._id === incomingCard._id)
+        if (card) {
+          // card.title = incomingCard.title
+          Object.keys(incomingCard).forEach(fieldName => card[fieldName] = incomingCard[fieldName])
+        }
+      }
     }
   },
 
@@ -47,6 +62,8 @@ export const activeBoardSlice = createSlice({
       let board = action.payload
 
       // Xử lý dữ liệu nếu cần thiết
+      // Thành viên trong board = owners + members
+      board.FE_allUsers = board.owners.concat(board.members)
 
       // Sắp xếp thứ tự các column luôn trước khi đưa dữ liệu xuống các component con
       board.columns = mapOrder(board.columns, board.columnOrderIds, '_id')
@@ -70,7 +87,7 @@ export const activeBoardSlice = createSlice({
 
 // Actions: là nơi dành cho các components bên dưới gọi bằng dispatch() tới nó để cập nhật lại dữ liệu thông qua reducer (chạy đồng bộ)
 // Để ý ở trên thi không thấy property actions đâu cả, vì những actions này đơn giản là được Redux tạo tự động theo tên của reducer.
-export const { updateCurrentActiveBoard } = activeBoardSlice.actions
+export const { updateCurrentActiveBoard, updateCardInBoard } = activeBoardSlice.actions
 
 // Selectors: là nơi dành cho các components bên dưới gọi bằng hook useSelector() để lấy dữ liệu từ trong kho Redux Store ra sử dụng.
 export const selectCurrentActiveBoard = (state) => {

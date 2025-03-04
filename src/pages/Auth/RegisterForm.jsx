@@ -60,7 +60,7 @@ function RegisterForm() {
                 label="Enter Email..."
                 type="text"
                 variant="outlined"
-                error={!!errors['email']} // Dùng prop này để hiện viền đỏ khi có error
+                error={!!errors['email']}
                 {...register('email', {
                   required: FIELD_REQUIRED_MESSAGE,
                   pattern: {

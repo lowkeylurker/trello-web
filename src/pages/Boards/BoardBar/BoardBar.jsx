@@ -75,10 +75,8 @@ function BoardBar({ board }) {
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        {/* Xử lý mời user vào làm thành viên của board */}
         <InviteBoardUser boardId={board._id} />
 
-        {/* Xử lý hiển thị danh sách thành viên của board */}
         <BoardUserGroup boardUsers={board?.FE_allUsers} />
       </Box>
     </Box>

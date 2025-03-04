@@ -61,13 +61,10 @@ function AppBar() {
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        {/* Tìm kiếm nahnh 1 hoặc nhiều board */}
         <AutoCompleteSearchBoard />
 
-        {/* Dark/light/system modes */}
         <ModeSelect />
 
-        {/* Xử lý hiển thị các thông báo - notifications ở đây */}
         <Notifications />
 
         <Tooltip title="Help">

@@ -3,16 +3,12 @@ import Box from '@mui/material/Box'
 import ListColumns from './ListColumns/ListColumns'
 import {
   DndContext,
-  // PointerSensor,
   useSensor,
   useSensors,
-  // MouseSensor,
-  // TouchSensor,
   DragOverlay,
   defaultDropAnimationSideEffects,
   closestCorners,
   pointerWithin,
-  // rectIntersection,
   getFirstCollision
 } from '@dnd-kit/core'
 

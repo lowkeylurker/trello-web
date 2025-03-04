@@ -12,32 +12,22 @@ import { selectCurrentActiveBoard } from '~/redux/activeBoard/activeBoardSlice'
 import { CARD_MEMBER_ACTIONS } from '~/utils/constants'
 
 function CardUserGroup({ cardMemberIds = [], onUpdateCardMembers }) {
-  /**
-   * Xử lý Popover để ẩn hoặc hiện toàn bộ user trên một cái popup, tương tự docs để tham khảo ở đây:
-   * https://mui.com/material-ui/react-popover/
-   */
   const [anchorPopoverElement, setAnchorPopoverElement] = useState(null)
   const isOpenPopover = Boolean(anchorPopoverElement)
   const popoverId = isOpenPopover ? 'card-all-users-popover' : undefined
+
   const handleTogglePopover = (event) => {
     if (!anchorPopoverElement) setAnchorPopoverElement(event.currentTarget)
     else setAnchorPopoverElement(null)
   }
 
-  // Lấy activeBoard từ redux mục đích để lấy toàn bộ thông tin những thành viên của board thông qua board.FE_allUsers
   const board = useSelector(selectCurrentActiveBoard)
 
-  /**
-   * Thành viên trong card sẽ phải là tập con của thành viên trong board.
-   * Vì thế dựa vào mảng board.FE_allUsers, cardMemberIds rồi chúng ta tạo ra 1 mảng FE_cardMembers chứa đủ thông tin của User để hiển thị ra ngoài giao diện, bởi mặc định trong card thì lưu Id của User thôi (memberIds).
-   */
   const FE_cardMembers = cardMemberIds.map(id => {
     return board.FE_allUsers.find(u => u._id === id)
   })
-  // const FE_cardMembers = board?.FE_allUsers.filter(user => cardMemberIds.includes(user._id))
 
   const handleUpdateCardMembers = (user) => {
-    // Tạo 1 biến incomingMemberInfo để gửi cho BE, với 2 thông tin chính là userId và action là xóa khỏi card (REMOVE) hoặc thêm vào card (ADD)
     const incomingMemberInfo = {
       userId: user._id,
       action: cardMemberIds.includes(user._id)
@@ -47,10 +37,8 @@ function CardUserGroup({ cardMemberIds = [], onUpdateCardMembers }) {
     onUpdateCardMembers(incomingMemberInfo)
   }
 
-  // Lưu ý ở đây chúng ta không dùng Component AvatarGroup của MUI bởi nó không hỗ trợ tốt trong việc chúng ta cần custom & trigger xử lý phần tử tính toán cuối, đơn giản là cứ dùng Box và CSS - Style đám Avatar cho chuẩn kết hợp tính toán một chút thôi.
   return (
     <Box sx={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
-      {/* Hiển thị các user là thành viên của card */}
       {FE_cardMembers.map((user, index) =>
         <Tooltip title={user?.displayName} key={index}>
           <Avatar
@@ -61,7 +49,6 @@ function CardUserGroup({ cardMemberIds = [], onUpdateCardMembers }) {
         </Tooltip>
       )}
 
-      {/* Nút này để mở popover thêm member */}
       <Tooltip title="Add new member">
         <Box
           aria-describedby={popoverId}
@@ -88,7 +75,6 @@ function CardUserGroup({ cardMemberIds = [], onUpdateCardMembers }) {
         </Box>
       </Tooltip>
 
-      {/* Khi Click vào + ở trên thì sẽ mở popover hiện toàn bộ users trong board để người dùng Click chọn thêm vào card  */}
       <Popover
         id={popoverId}
         open={isOpenPopover}
@@ -99,7 +85,6 @@ function CardUserGroup({ cardMemberIds = [], onUpdateCardMembers }) {
         <Box sx={{ p: 2, maxWidth: '260px', display: 'flex', flexWrap: 'wrap', gap: 1.5 }}>
           {board.FE_allUsers.map((user, index) =>
             <Tooltip title={user?.displayName} key={index}>
-              {/* Cách làm Avatar kèm badge icon: https://mui.com/material-ui/react-avatar/#with-badge */}
               <Badge
                 sx={{ cursor: 'pointer' }}
                 overlap="rectangular"

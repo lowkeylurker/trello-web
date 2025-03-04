@@ -2,11 +2,7 @@ import { toast } from 'react-toastify'
 import authorizedAxiosInstance from '~/utils/authorizedAxios'
 import { API_ROOT } from '~/utils/constants'
 
-// export const fetchBoardDetailsAPI = async (boardId) => {
-//   const response = await axios.get(`${API_ROOT}/v1/boards/${boardId}`)
-//   return response.data
-// }
-
+// Board API
 export const fetchBoardsAPI = async (searchPath) => {
   const response = await authorizedAxiosInstance.get(`${API_ROOT}/v1/boards${searchPath}`)
   return response.data
@@ -28,6 +24,7 @@ export const moveCardToDifferentColumnAPI = async (updateData) => {
   return response.data
 }
 
+// Column API
 export const createNewColumnAPI = async (newColumnData) => {
   const response = await authorizedAxiosInstance.post(`${API_ROOT}/v1/columns`, newColumnData)
   return response.data
@@ -43,6 +40,7 @@ export const deleteColumnDetailsAPI = async (columnId) => {
   return response.data
 }
 
+// Card API
 export const createNewCardAPI = async (newCardData) => {
   const response = await authorizedAxiosInstance.post(`${API_ROOT}/v1/cards`, newCardData)
   return response.data
@@ -53,6 +51,7 @@ export const updateCardDetailsAPI = async (cardId, updateData) => {
   return response.data
 }
 
+// User API
 export const registerUserAPI = async (data) => {
   const response = await authorizedAxiosInstance.post(`${API_ROOT}/v1/users/register`, data)
   toast.success('Account created successfully! Please check and verify your account before logging in!', { theme: 'colored' })
@@ -70,6 +69,7 @@ export const refreshTokenAPI = async () => {
   return response.data
 }
 
+// Invitation API
 export const inviteUserToBoardAPI = async (data) => {
   const response = await authorizedAxiosInstance.post(`${API_ROOT}/v1/invitations/board`, data)
   toast.success('User invited to board successfully!')

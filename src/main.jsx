@@ -33,7 +33,7 @@ createRoot(document.getElementById('root')).render(
             cancellationButtonProps: { color: 'inherit' },
             allowClose: false
           }}>
-            <GlobalStyles styles={{ a: { textDecoration: 'none' } }} />
+            <GlobalStyles styles={{ a: { textDecoration: 'none' }, '*': { fontSize: '14px' } }} />
             <CssBaseline />
             <App />
             <ToastContainer position='bottom-left' theme='colored' />

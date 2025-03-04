@@ -26,7 +26,7 @@ const SidebarItem = styled(Box)(({ theme }) => ({
   gap: '8px',
   cursor: 'pointer',
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  padding: '12px 16px',
+  padding: '8px 16px',
   borderRadius: '8px',
   '&:hover': {
     backgroundColor: theme.palette.mode === 'dark' ? '#33485D' : theme.palette.grey[300]

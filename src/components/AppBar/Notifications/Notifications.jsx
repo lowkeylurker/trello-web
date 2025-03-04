@@ -85,7 +85,7 @@ function Notifications() {
           onClick={handleClickNotificationIcon}
         >
           <NotificationsNoneIcon sx={{
-            color: hasNewNotification ? 'yellow' : 'white'
+            color: hasNewNotification ? 'green' : (theme) => theme.palette.text.main
           }} />
         </Badge>
       </Tooltip>

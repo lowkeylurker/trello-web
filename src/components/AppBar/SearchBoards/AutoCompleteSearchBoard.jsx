@@ -68,28 +68,28 @@ function AutoCompleteSearchBoard() {
             ...params.InputProps,
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon sx={{ color: 'white' }} />
+                <SearchIcon sx={{ color: (theme) => theme.palette.text.main }} />
               </InputAdornment>
             ),
             endAdornment: (
               <>
                 {loading ?
-                  <CircularProgress sx={{ color: 'white' }} size={20} /> : null
+                  <CircularProgress sx={{ color: (theme) => theme.palette.text.main }} size={20} /> : null
                 }
                 {params.InputProps.endAdornment}
               </>
             )
           }}
           sx={{
-            '& label': { color: 'white' },
-            '& input': { color: 'white' },
-            '& label.Mui-focused': { color: 'white' },
+            '& label': { color: (theme) => theme.palette.text.main },
+            '& input': { color: (theme) => theme.palette.text.main },
+            '& label.Mui-focused': { color: (theme) => theme.palette.text.main },
             '& .MuiOutlinedInput-root': {
-              '& fieldset': { borderColor: 'white' },
-              '&:hover fieldset': { borderColor: 'white' },
-              '&.Mui-focused fieldset': { borderColor: 'white' }
+              '& fieldset': { borderColor: (theme) => theme.palette.text.main },
+              '&:hover fieldset': { borderColor: (theme) => theme.palette.text.main },
+              '&.Mui-focused fieldset': { borderColor: (theme) => theme.palette.text.main }
             },
-            '.MuiSvgIcon-root': { color: 'white' }
+            '.MuiSvgIcon-root': { color: (theme) => theme.palette.text.main }
           }}
         />
       )}

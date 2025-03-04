@@ -13,7 +13,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-// import CardMedia from '@mui/material/CardMedia'
+import CardMedia from '@mui/material/CardMedia'
 import Pagination from '@mui/material/Pagination'
 import PaginationItem from '@mui/material/PaginationItem'
 import { Link, useLocation } from 'react-router-dom'
@@ -30,7 +30,7 @@ const SidebarItem = styled(Box)(({ theme }) => ({
   gap: '8px',
   cursor: 'pointer',
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  padding: '12px 16px',
+  padding: '8px 16px',
   borderRadius: '8px',
   '&:hover': {
     backgroundColor: theme.palette.mode === 'dark' ? '#33485D' : theme.palette.grey[300]
@@ -67,45 +67,48 @@ function Boards() {
   }
 
   return (
-    <Container disableGutters maxWidth={false}>
+    <>
       <AppBar />
-      <Box sx={{ paddingX: 2, my: 4 }}>
-        <Grid container spacing={2}>
-          <Grid xs={12} sm={3}>
-            <Stack direction="column" spacing={1}>
-              <SidebarItem className="active">
-                <SpaceDashboardIcon fontSize="small" />
-                Boards
-              </SidebarItem>
-              <SidebarItem>
-                <ListAltIcon fontSize="small" />
-                Templates
-              </SidebarItem>
-              <SidebarItem>
-                <HomeIcon fontSize="small" />
+      <Container disableGutters maxWidth={'xl'}>
+        <Box sx={{ paddingX: 2, my: 4 }}>
+          <Grid container spacing={2}>
+            <Grid xs={12} sm={2.5}>
+              <Stack direction="column" spacing={1}>
+                <SidebarItem className="active">
+                  <SpaceDashboardIcon fontSize="small" />
+                    Boards
+                </SidebarItem>
+                <SidebarItem>
+                  <ListAltIcon fontSize="small" />
+                    Templates
+                </SidebarItem>
+                <SidebarItem>
+                  <HomeIcon fontSize="small" />
                 Home
-              </SidebarItem>
-            </Stack>
-            <Divider sx={{ my: 1 }} />
-            <Stack direction="column" spacing={1}>
-              <SidebarCreateBoardModal afterCreateNewBoard={afterCreateNewBoard} />
-            </Stack>
-          </Grid>
+                </SidebarItem>
+              </Stack>
+              <Divider sx={{ my: 1 }} />
+              <Stack direction="column" spacing={1}>
+                <SidebarCreateBoardModal afterCreateNewBoard={afterCreateNewBoard} />
+              </Stack>
+            </Grid>
 
-          <Grid xs={12} sm={9}>
-            <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 3 }}>Your boards:</Typography>
+            <Grid xs={12} sm={9.5}>
+              <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 3 }}>Your boards:</Typography>
 
-            {boards?.length === 0 &&
+              {boards?.length === 0 &&
               <Typography variant="span" sx={{ fontWeight: 'bold', mb: 3 }}>No result found!</Typography>
-            }
+              }
 
-            {boards?.length > 0 &&
+              {boards?.length > 0 &&
               <Grid container spacing={2}>
                 {boards.map(b =>
                   <Grid xs={2} sm={3} md={4} key={b._id}>
                     <Card sx={{ width: '250px' }}>
-                      {/* <CardMedia component="img" height="100" image="https://picsum.photos/100" /> */}
-                      <Box sx={{ height: '50px', backgroundColor: randomColor() }}></Box>
+                      { b.backgroundUrl
+                        ? <CardMedia component="img" height="100" image={b.backgroundUrl} />
+                        : <Box sx={{ height: '100px', backgroundColor: randomColor() }}></Box>
+                      }
 
                       <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
                         <Typography gutterBottom variant="h6" component="div">
@@ -128,17 +131,18 @@ function Boards() {
                             justifyContent: 'flex-end',
                             color: 'primary.main',
                             '&:hover': { color: 'primary.light' }
-                          }}>
-                          Go to board <ArrowRightIcon fontSize="small" />
+                          }}
+                        >
+                            Go to board <ArrowRightIcon fontSize="small" />
                         </Box>
                       </CardContent>
                     </Card>
                   </Grid>
                 )}
               </Grid>
-            }
+              }
 
-            {(totalBoards > 0) &&
+              {(totalBoards > 0) &&
               <Box sx={{ my: 3, pr: 5, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
                 <Pagination
                   size="large"
@@ -156,11 +160,13 @@ function Boards() {
                   )}
                 />
               </Box>
-            }
+              }
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+    </>
+
   )
 }
 

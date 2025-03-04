@@ -16,18 +16,16 @@ const theme = extendTheme({
     columnFooterHeight: COLUMN_FOOTER_HEIGHT
   },
   colorSchemes: {
-    // light: {
-    //   palette: {
-    //     primary: teal,
-    //     secondary: deepOrange
-    //   }
-    // },
-    // dark: {
-    //   palette: {
-    //     primary: cyan,
-    //     secondary: orange
-    //   }
-    // }
+    light: {
+      palette: {
+        background: { main: 'white' },
+        text: { main: '#172B4D' }
+      }
+    },
+    dark: {
+      palette: {
+      }
+    }
   },
   components: {
     MuiCssBaseline: {
@@ -50,6 +48,7 @@ const theme = extendTheme({
     MuiButton: {
       styleOverrides: {
         root: {
+          fontSize: '1rem',
           textTransform: 'none',
           borderWidth: '1px',
           '&:hover': { borderWidth: '2px' }
@@ -59,8 +58,7 @@ const theme = extendTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          // color: theme.palette.primary.main,
-          fontSize: '0.875rem',
+          // color: theme.palette.primary.main
           // '.MuiOutlinedInput-notchedOutline': {
           //   borderColor: theme.palette.primary.main
           // },
@@ -72,21 +70,6 @@ const theme = extendTheme({
           '& fieldset': { borderWidth: '1px !important' },
           '&:hover fieldset': { borderWidth: '2px !important' },
           '&.Mui-focused fieldset': { borderWidth: '2px !important' }
-        }
-      }
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          // color: theme.palette.primary.main,
-          fontSize: '.875rem'
-        }
-      }
-    },
-    MuiTypography: {
-      styleOverrides: {
-        body1: {
-          fontSize: '.875rem'
         }
       }
     }

@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box'
-import ModeSelect from '~/components/ModeSelect/ModeSelect'
 import AppsIcon from '@mui/icons-material/Apps'
 import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
 import SvgIcon from '@mui/material/SvgIcon'
@@ -27,20 +26,20 @@ function AppBar() {
       justifyContent: 'space-between',
       gap: 2,
       overflowX: 'auto',
-      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#2c3e50' : '#1565c0')
+      bgcolor: 'white',
+      borderBottom: '1px solid #ddd'
     }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-
         <Link to='/boards'>
           <Tooltip title='Board List'>
-            <AppsIcon sx={{ color: 'white', verticalAlign: 'middle' }} />
+            <AppsIcon sx={{ verticalAlign: 'middle', color: (theme) => theme.palette.text.main }} />
           </Tooltip>
         </Link>
 
         <Link to='/'>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-            <SvgIcon component={TrelloIcon} fontSize='small' inheritViewBox sx={{ color: 'white' }}/>
-            <Typography sx={{ color: 'white', fontWeight: 500, fontSize: '1.2rem' }} variant='span'>Trello</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: (theme) => theme.palette.text.main }}>
+            <SvgIcon component={TrelloIcon} fontSize='small' inheritViewBox />
+            <Typography sx={{ fontWeight: 500, fontSize: '1.2rem' }} variant='span'>Trello</Typography>
           </Box>
         </Link>
 
@@ -52,7 +51,7 @@ function AppBar() {
           <Templates />
           <Button
             startIcon={<LibraryAddIcon />}
-            sx={{ color: 'white' }}
+            sx={{ color: (theme) => theme.palette.text.main }}
           >
             Create
           </Button>
@@ -63,12 +62,10 @@ function AppBar() {
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <AutoCompleteSearchBoard />
 
-        <ModeSelect />
-
         <Notifications />
 
         <Tooltip title="Help">
-          <HelpOutlineIcon sx={{ cursor: 'pointer', color: 'white' }}/>
+          <HelpOutlineIcon sx={{ cursor: 'pointer' }}/>
         </Tooltip>
 
         <Profiles />

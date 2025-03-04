@@ -31,9 +31,7 @@ function Card({ card }) {
   }
 
   const setActiveCard = () => {
-    // Cập nhật data cho cái activeCard trong Redux
     dispatch(updateCurrentActiveCard(card))
-    // Hiện Modal ActiveCard
     dispatch(showModalActiveCard())
   }
 

@@ -13,12 +13,10 @@ function CardActivitySection({ cardComments = [], onAddCardComment }) {
   const currentUser = useSelector(selectCurrentUser)
 
   const handleAddCardComment = (event) => {
-    // Bắt hành động người dùng nhấn phím Enter && không phải hành động Shift + Enter
     if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault() // Thêm dòng này để khi Enter không bị nhảy dòng
-      if (!event.target?.value) return // Nếu không có giá trị gì thì return không làm gì cả
+      event.preventDefault()
+      if (!event.target?.value) return
 
-      // Tạo một biến commend data để gửi api
       const commentToAdd = {
         userAvatar: currentUser?.avatar,
         userDisplayName: currentUser?.displayName,
@@ -33,7 +31,6 @@ function CardActivitySection({ cardComments = [], onAddCardComment }) {
 
   return (
     <Box sx={{ mt: 2 }}>
-      {/* Xử lý thêm comment vào Card */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
         <Avatar
           sx={{ width: 36, height: 36, cursor: 'pointer' }}
@@ -50,7 +47,6 @@ function CardActivitySection({ cardComments = [], onAddCardComment }) {
         />
       </Box>
 
-      {/* Hiển thị danh sách các comments */}
       {cardComments.length === 0 &&
         <Typography sx={{ pl: '45px', fontSize: '14px', fontWeight: '500', color: '#b1b1b1' }}>No activity found!</Typography>
       }

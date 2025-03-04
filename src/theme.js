@@ -1,4 +1,3 @@
-// import { cyan, deepOrange, orange, teal } from '@mui/material/colors'
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
 
 const APP_BAR_HEIGHT = '58px'
@@ -8,7 +7,6 @@ const BOARD_CONTENT_HEIGHT = `calc(100vh - ${APP_BAR_HEIGHT} - ${BOARD_BAR_HEIGH
 const COLUMN_HEADER_HEIGHT = '50px'
 const COLUMN_FOOTER_HEIGHT = '56px'
 
-// Create a theme instance.
 const theme = extendTheme({
   trello: {
     appBarHeight: APP_BAR_HEIGHT,
@@ -18,18 +16,16 @@ const theme = extendTheme({
     columnFooterHeight: COLUMN_FOOTER_HEIGHT
   },
   colorSchemes: {
-    // light: {
-    //   palette: {
-    //     primary: teal,
-    //     secondary: deepOrange
-    //   }
-    // },
-    // dark: {
-    //   palette: {
-    //     primary: cyan,
-    //     secondary: orange
-    //   }
-    // }
+    light: {
+      palette: {
+        background: { main: 'white' },
+        text: { main: '#172B4D' }
+      }
+    },
+    dark: {
+      palette: {
+      }
+    }
   },
   components: {
     MuiCssBaseline: {
@@ -52,6 +48,7 @@ const theme = extendTheme({
     MuiButton: {
       styleOverrides: {
         root: {
+          fontSize: '1rem',
           textTransform: 'none',
           borderWidth: '1px',
           '&:hover': { borderWidth: '2px' }
@@ -61,8 +58,7 @@ const theme = extendTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          // color: theme.palette.primary.main,
-          fontSize: '0.875rem',
+          // color: theme.palette.primary.main
           // '.MuiOutlinedInput-notchedOutline': {
           //   borderColor: theme.palette.primary.main
           // },
@@ -74,21 +70,6 @@ const theme = extendTheme({
           '& fieldset': { borderWidth: '1px !important' },
           '&:hover fieldset': { borderWidth: '2px !important' },
           '&.Mui-focused fieldset': { borderWidth: '2px !important' }
-        }
-      }
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          // color: theme.palette.primary.main,
-          fontSize: '.875rem'
-        }
-      }
-    },
-    MuiTypography: {
-      styleOverrides: {
-        body1: {
-          fontSize: '.875rem'
         }
       }
     }

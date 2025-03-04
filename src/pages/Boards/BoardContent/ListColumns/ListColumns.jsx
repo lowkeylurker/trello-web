@@ -33,7 +33,6 @@ function ListColumns({ columns }) {
       return
     }
 
-    // Call API...
     const newColumnData = { title: newColumnTitle }
 
     const createdColumn = await createNewColumnAPI({
@@ -44,28 +43,12 @@ function ListColumns({ columns }) {
     createdColumn.cards = [generatePlaceholderCard(createdColumn)]
     createdColumn.cardOrderIds = [generatePlaceholderCard(createdColumn)._id]
 
-    /**
-     * Đoạn này bị lỗi not extensible do spread operator là shallow copy
-     * => vi phạm rules Immutability (bất biến) của Redux Toolkit
-     * => không dùng push() được
-     *  Cách 1: dùng deep copy
-    */
-    // const newBoard = { ...board }
     const newBoard = cloneDeep(board)
     newBoard.columns.push(createdColumn)
     newBoard.columnOrderIds.push(createdColumn._id)
 
-    /**
-     * Cách 2: dùng array.concat() thay cho push() vì push thay đổi mảng trực tiếp, còn concat() thì merge mảng lại và tạo mảng mới
-     */
-    // const newBoard = { ...board }
-    // newBoard.columns = newBoard.columns.concat([createdColumn])
-    // newBoard.columnOrderIds = newBoard.columnOrderIds.concat([createdColumn._id])
-
-    // Cập nhật dữ liệu Board vào Redux Store
     dispatch(updateCurrentActiveBoard(newBoard))
 
-    // Đóng form thêm Column mới và xóa dữ liệu input
     setOpenNewColumnForm(false)
     setNewColumnTitle('')
   }
@@ -164,7 +147,6 @@ function ListColumns({ columns }) {
             </Box>
           </Box>
         }
-
       </Box>
     </SortableContext>
 

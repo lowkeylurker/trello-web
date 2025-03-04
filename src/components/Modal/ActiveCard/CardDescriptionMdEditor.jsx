@@ -8,13 +8,9 @@ import Button from '@mui/material/Button'
 import EditNoteIcon from '@mui/icons-material/EditNote'
 
 function CardDescriptionMdEditor({ cardDescriptionProp, handleUpdateCardDescription }) {
-  // Lấy giá trị 'dark', 'light' hoặc 'system' mode từ MUI để support phần Markdown bên dưới: data-color-mode={mode}
-  // https://www.npmjs.com/package/@uiw/react-md-editor#support-dark-modenight-mode
   const { mode } = useColorScheme()
 
-  // State xử lý chế độ Edit và chế độ View
   const [markdownEditMode, setMarkdownEditMode] = useState(false)
-  // State xử lý giá trị markdown khi chỉnh sửa
   const [cardDescription, setCardDescription] = useState(cardDescriptionProp)
 
   const updateCardDescription = () => {
@@ -30,9 +26,9 @@ function CardDescriptionMdEditor({ cardDescriptionProp, handleUpdateCardDescript
             <MDEditor
               value={cardDescription}
               onChange={setCardDescription}
-              previewOptions={{ rehypePlugins: [[rehypeSanitize]] }} // https://www.npmjs.com/package/@uiw/react-md-editor#security
+              previewOptions={{ rehypePlugins: [[rehypeSanitize]] }}
               height={400}
-              preview="edit" // Có 3 giá trị để set tùy nhu cầu ['edit', 'live', 'preview']
+              preview="edit"
               // hideToolbar={true}
             />
           </Box>

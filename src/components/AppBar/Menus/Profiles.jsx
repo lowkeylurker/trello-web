@@ -5,14 +5,15 @@ import MenuItem from '@mui/material/MenuItem'
 import Divider from '@mui/material/Divider'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import Avatar from '@mui/material/Avatar'
-import { IconButton, Tooltip } from '@mui/material'
-import PersonAdd from '@mui/icons-material/PersonAdd'
+import { IconButton, ListItemText, Tooltip, Typography } from '@mui/material'
 import Settings from '@mui/icons-material/Settings'
 import Logout from '@mui/icons-material/Logout'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUserAPI, selectCurrentUser } from '~/redux/user/userSlice'
 import { useConfirm } from 'material-ui-confirm'
-import { Link } from 'react-router-dom'
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined'
+import ContrastOutlinedIcon from '@mui/icons-material/ContrastOutlined'
 
 
 function Profiles() {
@@ -51,7 +52,7 @@ function Profiles() {
           aria-expanded={open ? 'true' : undefined}
         >
           <Avatar
-            sx={{ width: 30, height: 30 }}
+            sx={{ width: 25, height: 25 }}
             src={currentUser?.avatar}
             alt={currentUser?.displayName}
           />
@@ -66,41 +67,89 @@ function Profiles() {
         MenuListProps={{
           'aria-labelledby': 'basic-button-profiles'
         }}
+        sx={{ '.MuiPaper-root': { borderRadius: '10px', top: '58px !important' } }}
       >
-        <Link to='/settings/account' style={{ color : 'inherit' }}>
-          <MenuItem sx={{
-            '&:hover': { color: 'success.light' }
+        <MenuItem sx={{ pointerEvents: 'none', my: 1 }}>
+          <ListItemText sx={{
+            color: (theme) => theme.palette.text.main,
+            textTransform: 'uppercase',
+            '& .MuiTypography-root': { fontWeight: '500' }
           }}>
-            <Avatar
-              sx={{ width: '28px', height: '28px', mr: 2 }}
-              src={currentUser?.avatar}
-            />
-          Profile
-          </MenuItem>
-        </Link>
-        <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
+            Profile
+          </ListItemText>
         </MenuItem>
+
+        <MenuItem
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+            mb: 2,
+            pointerEvents: 'none'
+          }}
+        >
+          <Avatar
+            sx={{ width: '28px', height: '28px' }}
+            src={currentUser?.avatar}
+          />
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography sx={{ color: (theme) => theme.palette.text.main, fontWeight: '500', fontSize: '1.05rem' }}>{currentUser.displayName}</Typography>
+            <Typography sx={{ color: (theme) => theme.palette.text.main }}>{currentUser.email}</Typography>
+          </Box>
+        </MenuItem>
+
         <MenuItem>
+          <ListItemText>Add another account</ListItemText>
+          <ListItemIcon>
+            <PersonAddAltOutlinedIcon fontSize="small" />
+          </ListItemIcon>
+        </MenuItem>
+
+        <MenuItem>
+          <ListItemText>Manage Profile</ListItemText>
+          <ListItemIcon>
+            <ManageAccountsOutlinedIcon fontSize='small'/>
+          </ListItemIcon>
+        </MenuItem>
+
+        <Divider />
+
+        <MenuItem sx={{ pointerEvents: 'none' }}>
+          <ListItemText sx={{
+            color: (theme) => theme.palette.text.main,
+            textTransform: 'uppercase',
+            '& .MuiTypography-root': { fontWeight: '500' }
+          }}>
+            Trello
+          </ListItemText>
+        </MenuItem>
+
+        <MenuItem>
+          <ListItemText>Theme</ListItemText>
+          <ListItemIcon>
+            <ContrastOutlinedIcon fontSize="small" />
+          </ListItemIcon>
+        </MenuItem>
+
+        <MenuItem>
+          <ListItemText>Settings</ListItemText>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
-          Settings
         </MenuItem>
+
+        <Divider />
+
         <MenuItem onClick={handleLogout} sx={{
           '&:hover': {
             color: 'warning.dark',
             '& .logout-icon': { color: 'warning.dark' }
           }
         }}>
+          <ListItemText>Logout</ListItemText>
           <ListItemIcon>
             <Logout className='logout-icon' fontSize="small" />
           </ListItemIcon>
-          Logout
         </MenuItem>
       </Menu>
     </Box>

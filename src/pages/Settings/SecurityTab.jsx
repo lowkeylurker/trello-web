@@ -20,11 +20,9 @@ function SecurityTab() {
   const dispatch = useDispatch()
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
 
-  // Ôn lại: https://www.npmjs.com/package/material-ui-confirm
   const confirmChangePassword = useConfirm()
   const submitChangePassword = (data) => {
     confirmChangePassword({
-      // Title, Description, Content...vv của gói material-ui-confirm đều có type là ReactNode nên có thể thoải sử dụng MUI components, rất tiện lợi khi cần custom styles
       title: <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <LogoutIcon sx={{ color: 'warning.dark' }} /> Change Password
       </Box>,
@@ -32,14 +30,13 @@ function SecurityTab() {
       confirmationText: 'Confirm',
       cancellationText: 'Cancel'
     }).then(() => {
+      // eslint-disable-next-line no-unused-vars
       const { current_password, new_password, new_password_confirmation } = data
 
-      // Gọi API...
       toast.promise(
         dispatch(updateUserAPI({ current_password, new_password })),
         { pending: 'Updating...' }
       ).then(res => {
-        // Nếu update thành công thì thực hiện các hành động cần thiết
         if (!res.error) {
           toast.success('Change password successfully! Please Login again!')
           dispatch(logoutUserAPI())
@@ -149,7 +146,8 @@ function SecurityTab() {
                 type="submit"
                 variant="contained"
                 color="primary"
-                fullWidth>
+                fullWidth
+              >
                 Change
               </Button>
             </Box>

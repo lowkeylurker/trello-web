@@ -61,7 +61,6 @@ function Column({ column }) {
       return
     }
 
-    // Call API...
     const newCardData = {
       title: newCardTitle,
       columnId: column._id
@@ -69,8 +68,6 @@ function Column({ column }) {
 
     const createdCard = await createNewCardAPI({ ...newCardData, boardId: board._id })
 
-    // update board state
-    // const newBoard = { ...board }
     const newBoard = cloneDeep(board)
     const columnToUpdate = newBoard.columns.find(column => column._id === createdCard.columnId)
     if (columnToUpdate) {
@@ -112,7 +109,6 @@ function Column({ column }) {
   }
 
   const onUpdateColumnTitle = (newTitle) => {
-    // Gọi API update Column và xử lý dữ liệu board trong redux
     updateColumnDetailsAPI(column._id, { title: newTitle }).then(() => {
       const newBoard = cloneDeep(board)
       const columnToUpdate = newBoard.columns.find(c => c._id === column._id)
@@ -136,7 +132,6 @@ function Column({ column }) {
           maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
         }}
       >
-        {/* Column Header */}
         <Box sx={{
           height: (theme) => theme.trello.columnHeaderHeight,
           p: 2,
@@ -217,10 +212,8 @@ function Column({ column }) {
           </Box>
         </Box>
 
-        {/* Column List Card */}
         <ListCards cards={orderedCards} />
 
-        {/* Column Footer */}
         <Box sx={{
           height: (theme) => theme.trello.columnFooterHeight,
           p: 2
@@ -294,8 +287,6 @@ function Column({ column }) {
               </Box>
             </Box>
           }
-
-
         </Box>
       </Box>
     </div>

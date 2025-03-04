@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import Alert from '@mui/material/Alert'
 
-// Component này có nhiệm vụ trả về một Alert Message cho field chỉ định (nếu có).
 function FieldErrorAlert({ errors, fieldName }) {
   if (!errors || !errors[fieldName]) return null
   return (

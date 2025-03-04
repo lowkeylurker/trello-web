@@ -35,11 +35,7 @@ function Board() {
   const moveColumns = (dndOrderedColumns) => {
     const dndOrderdedColumnsIds = dndOrderedColumns.map(c => c._id)
 
-    /**
-     * Ở đây ta chỉ gán lại giá trị nên không cần deep copy
-     */
     const newBoard = { ...board }
-    // const newBoard = cloneDeep(board)
     newBoard.columns = dndOrderedColumns
     newBoard.columnOrderIds = dndOrderdedColumnsIds
     dispatch(updateCurrentActiveBoard((newBoard)))
@@ -48,11 +44,6 @@ function Board() {
   }
 
   const moveCardInTheSameColumn = (dndOrderedCards, dndOrderedCardIds, columnId) => {
-    /**
-     * Lỗi: Cannot assign to read only property 'cards' of object
-     * Trường hợp Immutability ở đây đã đụng tới giá trị cards đang được xem là read only (do nested object - can thiệp sâu dữ liệu)
-     */
-    // const newBoard = { ...board }
     const newBoard = cloneDeep(board)
     const columnToUpdate = newBoard.columns.find(column => column._id === columnId)
     if (columnToUpdate) {
@@ -68,7 +59,6 @@ function Board() {
     const dndOrderdedColumnsIds = dndOrderedColumns.map(c => c._id)
 
     const newBoard = { ...board }
-    // const newBoard = cloneDeep(board)
     newBoard.columns = dndOrderedColumns
     newBoard.columnOrderIds = dndOrderdedColumnsIds
     dispatch(updateCurrentActiveBoard(newBoard))
@@ -90,10 +80,8 @@ function Board() {
 
   return (
     <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
-      {/* Modal Active Card, check đóng/mở dựa theo điều kiện state isShowModalActiveCard lưu trong Redux hay không thì mới render. Mỗi thời điểm chỉ tồn tại một Modal Card đang Active */}
       <ActiveCard />
 
-      {/* Các thành phần còn lại của Board Details */}
       <AppBar />
       <BoardBar board={board} />
       <BoardContent

@@ -14,10 +14,6 @@ import { inviteUserToBoardAPI } from '~/apis'
 import { socketIoInstance } from '~/socketClient'
 
 function InviteBoardUser({ boardId }) {
-  /**
-   * Xử lý Popover để ẩn hoặc hiện một popup nhỏ, tương tự docs để tham khảo ở đây:
-   * https://mui.com/material-ui/react-popover/
-  */
   const [anchorPopoverElement, setAnchorPopoverElement] = useState(null)
   const isOpenPopover = Boolean(anchorPopoverElement)
   const popoverId = isOpenPopover ? 'invite-board-user-popover' : undefined
@@ -30,13 +26,10 @@ function InviteBoardUser({ boardId }) {
   const submitInviteUserToBoard = (data) => {
     const { inviteeEmail } = data
 
-    // Gọi API mời người dùng nào đó vào làm thành viên của Board
     inviteUserToBoardAPI({ inviteeEmail, boardId }).then((invitation) => {
-      // Clear thẻ input sử dụng react-hook-form bằng setValue, đồng thời đóng popover lại
       setValue('inviteeEmail', null)
       setAnchorPopoverElement(null)
 
-      // Mời một người dùng vào board xong thì cũng sẽ gửi/emit sự kiện socket lên server (tính năng real-time) > FE_USER_INVITED_TO_BOARD
       socketIoInstance.emit('FE_USER_INVITED_TO_BOARD', invitation)
     })
   }
@@ -55,7 +48,6 @@ function InviteBoardUser({ boardId }) {
         </Button>
       </Tooltip>
 
-      {/* Khi Click vào butotn Invite ở trên thì sẽ mở popover */}
       <Popover
         id={popoverId}
         open={isOpenPopover}

@@ -39,7 +39,6 @@ function LoginForm() {
       dispatch(loginUserAPI({ email, password })),
       { pending: 'Login is in progress...' }
     ).then(res => {
-      // Đoạn này phải kiểm tra không có lỗi (login thành công) thì mới redirect về route '/'
       if (!res.error) navigate('/')
     })
   }
@@ -85,7 +84,7 @@ function LoginForm() {
                 label="Enter Email..."
                 type="text"
                 variant="outlined"
-                error={!!errors['email']} // Dùng prop này để hiện viền đỏ khi có error
+                error={!!errors['email']}
                 {...register('email', {
                   required: FIELD_REQUIRED_MESSAGE,
                   pattern: {

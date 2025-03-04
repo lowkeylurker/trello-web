@@ -59,30 +59,21 @@ const SidebarItem = styled(Box)(({ theme }) => ({
   }
 }))
 
-/**
- * Note: Modal là một low-component mà bọn MUI sử dụng bên trong những thứ như Dialog, Drawer, Menu, Popover. Ở đây dĩ nhiên chúng ta có thể sử dụng Dialog cũng không thành vấn đề gì, nhưng sẽ sử dụng Modal để dễ linh hoạt tùy biến giao diện từ con số 0 cho phù hợp với mọi nhu cầu nhé.
- */
 function ActiveCard() {
   const dispatch = useDispatch()
   const activeCard = useSelector(selectCurrentActiveCard)
   const isShowModalActiveCard = useSelector(selectIsShowModalActiveCard)
   const currentUser = useSelector(selectCurrentUser)
-  // Không dùng biến State để check đóng/mở Modal nữa vì chúng ta sẽ check theo state isShowModalActiveCard trong Redux
-  // const [isOpen, setIsOpen] = useState(true)
-  // const handleOpenModal = () => setIsOpen(true)
+
   const handleCloseModal = () => {
-    // setIsOpen(false)
     dispatch(clearAndHideCurrentActiveCard())
   }
 
-  // Function gọi API dùng chung cho các trường hợp update card title, description, cover, comment,...
   const callApiUpdateCard = async (updateData) => {
     const updatedCard = await updateCardDetailsAPI(activeCard._id, updateData)
 
-    // Bước 1: Cập nhật lại card đang active trong modal hiện tại
     dispatch(updateCurrentActiveCard(updatedCard))
 
-    // Bước 2: Cập nhật lại bản ghi card trong activeBoard (nested data)
     dispatch(updateCardInBoard(updatedCard))
 
     return updatedCard
@@ -105,14 +96,12 @@ function ActiveCard() {
     let reqData = new FormData()
     reqData.append('cardCover', event.target?.files[0])
 
-    // Gọi API...
     toast.promise(
       callApiUpdateCard(reqData).finally(() => event.target.value = ''),
       { pending: 'Updating...' }
     )
   }
 
-  // Dùng async/await ở đây để component con CardActivitySection chở và nếu thành công thì mới clear thẻ input comment
   const onAddCardComment = async (commentToAdd) => {
     await callApiUpdateCard({ commentToAdd })
   }
@@ -125,7 +114,7 @@ function ActiveCard() {
     <Modal
       disableScrollLock
       open={isShowModalActiveCard}
-      onClose={handleCloseModal} // Sử dụng onClose trong trường hợp muốn đóng Modal bằng nút ESC hoặc click ra ngoài Modal
+      onClose={handleCloseModal}
       sx={{ overflowY: 'auto' }}>
       <Box sx={{
         position: 'relative',
@@ -163,20 +152,18 @@ function ActiveCard() {
         <Box sx={{ mb: 1, mt: -3, pr: 2.5, display: 'flex', alignItems: 'center', gap: 1 }}>
           <CreditCardIcon />
 
-          {/* Feature 01: Xử lý tiêu đề của Card */}
           <ToggleFocusInput
             inputFontSize='22px'
             value={activeCard?.title}
-            onChangedValue={onUpdateCardTitle} />
+            onChangedValue={onUpdateCardTitle}
+          />
         </Box>
 
         <Grid container spacing={2} sx={{ mb: 3 }}>
-          {/* Left side */}
           <Grid xs={12} sm={9}>
             <Box sx={{ mb: 3 }}>
               <Typography sx={{ fontWeight: '600', color: 'primary.main', mb: 1 }}>Members</Typography>
 
-              {/* Feature 02: Xử lý các thành viên của Card */}
               <CardUserGroup
                 cardMemberIds={activeCard?.memberIds}
                 onUpdateCardMembers={onUpdateCardMembers}
@@ -189,7 +176,6 @@ function ActiveCard() {
                 <Typography variant="span" sx={{ fontWeight: '600', fontSize: '20px' }}>Description</Typography>
               </Box>
 
-              {/* Feature 03: Xử lý mô tả của Card */}
               <CardDescriptionMdEditor
                 cardDescriptionProp={activeCard?.description}
                 handleUpdateCardDescription={onUpdateCardDescription}
@@ -202,7 +188,6 @@ function ActiveCard() {
                 <Typography variant="span" sx={{ fontWeight: '600', fontSize: '20px' }}>Activity</Typography>
               </Box>
 
-              {/* Feature 04: Xử lý các hành động, ví dụ comment vào Card */}
               <CardActivitySection
                 cardComments={activeCard?.comments}
                 onAddCardComment={onAddCardComment}
@@ -210,13 +195,9 @@ function ActiveCard() {
             </Box>
           </Grid>
 
-          {/* Right side */}
           <Grid xs={12} sm={3}>
             <Typography sx={{ fontWeight: '600', color: 'primary.main', mb: 1 }}>Add To Card</Typography>
             <Stack direction="column" spacing={1}>
-              {/* Feature 05: Xử lý hành động bản thân user tự join vào card */}
-              {/* Nếu user hiện tại đang đăng nhập chưa thuộc mảng memberIds của card thì mới cho hiện nút Join ra */}
-              {/* Khi click vào Join thì nó sẽ luôn là hành động ADD */}
               {!activeCard?.memberIds.includes(currentUser._id) &&
                 <SidebarItem
                   className="active"
@@ -230,7 +211,6 @@ function ActiveCard() {
                 </SidebarItem>
               }
 
-              {/* Feature 06: Xử lý hành động cập nhật ảnh Cover của Card */}
               <SidebarItem className="active" component="label">
                 <ImageOutlinedIcon fontSize="small" />
                 Cover

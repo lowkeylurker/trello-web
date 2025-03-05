@@ -19,7 +19,19 @@ const theme = extendTheme({
     light: {
       palette: {
         background: { main: 'white' },
-        text: { main: '#172B4D' }
+        text: { main: '#172B4D' },
+        mainColor1: {
+  				'100': '#9595C9',
+  				'200': '#8786C0',
+  				'400': '#6666AE',
+  				'600': '#464B9F',
+  				'800': '#2F2F89'
+  			},
+  			mainColor2: {
+  				'100': '#CEACD1',
+  				'300': '#C29BC8',
+  				'800': '#854C9D'
+  			}
       }
     },
     dark: {

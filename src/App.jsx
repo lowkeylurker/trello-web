@@ -10,10 +10,11 @@ import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/user/userSlice'
 import Settings from './pages/Settings/Settings'
 import Boards from './pages/Boards'
+import LandingPage from './pages/Landing/LandingPage'
 
 const ProtectedRoute = ({ user }) => {
   if (!user) return <Navigate to='/login' replace={true} />
-  return <Outlet /> // Hiển thị các Child Route
+  return <Outlet />
 }
 
 function App() {
@@ -21,9 +22,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path='/' element={
-        <Navigate to='/boards' replace={true} />
-      } />
+      <Route path='/' element={<LandingPage />} />
 
       <Route element={<ProtectedRoute user={currentUser} />}>
         {/* Board Details */}

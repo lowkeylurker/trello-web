@@ -13,7 +13,7 @@ function Auth() {
 
   const currentUser = useSelector(selectCurrentUser)
   if (currentUser) {
-    return <Navigate to='/' replace={true} />
+    return <Navigate to='/boards' replace={true} />
   }
 
   return (
@@ -22,10 +22,10 @@ function Auth() {
       flexDirection: 'column',
       minHeight: '100vh',
       alignItems: 'center',
-      justifyContent: 'flex-start',
-      background: 'url("src/assets/auth/login-register-bg.jpg")',
+      justifyContent: 'center',
+      background: 'url("src/assets/bg-landing-page.jpg")',
       backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
+      backgroundSize: 'contain',
       backgroundPosition: 'center',
       boxShadow: 'inset 0 0 0 2000px rgba(0, 0, 0, 0.2)'
     }}>

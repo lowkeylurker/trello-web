@@ -81,7 +81,11 @@ const theme = extendTheme({
           // },
           '& fieldset': { borderWidth: '1px !important' },
           '&:hover fieldset': { borderWidth: '2px !important' },
-          '&.Mui-focused fieldset': { borderWidth: '2px !important' }
+          '&.Mui-focused fieldset': { borderWidth: '2px !important' },
+          borderRadius: '8px'
+        },
+        input: {
+          padding: '14.5px 14px'
         }
       }
     }

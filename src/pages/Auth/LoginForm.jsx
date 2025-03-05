@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar'
 import LockIcon from '@mui/icons-material/Lock'
 import Typography from '@mui/material/Typography'
 import { Card as MuiCard } from '@mui/material'
-import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
+import { ReactComponent as TrelloIcon } from '~/assets/logo.svg'
 import CardActions from '@mui/material/CardActions'
 import TextField from '@mui/material/TextField'
 import Zoom from '@mui/material/Zoom'
@@ -37,54 +37,57 @@ function LoginForm() {
     const { email, password } = data
     toast.promise(
       dispatch(loginUserAPI({ email, password })),
-      { pending: 'Login is in progress...' }
+      { pending: 'Đang đăng nhập...' }
     ).then(res => {
-      if (!res.error) navigate('/')
+      if (!res.error) navigate('/boards')
     })
   }
 
   return (
     <form onSubmit={handleSubmit(submitLogIn)}>
       <Zoom in={true} style={{ transitionDelay: '200ms' }}>
-        <MuiCard sx={{ minWidth: 380, maxWidth: 380, marginTop: '6em' }}>
+        <MuiCard sx={{ minWidth: 380, maxWidth: 380 }}>
           <Box sx={{
             margin: '1em',
             display: 'flex',
             justifyContent: 'center',
             gap: 1
           }}>
-            <Avatar sx={{ bgcolor: 'primary.main' }}><LockIcon /></Avatar>
-            <Avatar sx={{ bgcolor: 'primary.main' }}><TrelloIcon /></Avatar>
+            <Avatar sx={{ bgcolor: (theme) => theme.palette.mainColor1[400] }}><LockIcon /></Avatar>
+            <Avatar sx={{ bgcolor: 'transparent' }}><TrelloIcon /></Avatar>
           </Box>
-          <Box sx={{ marginTop: '1em', display: 'flex', justifyContent: 'center', color: theme => theme.palette.grey[500] }}>
-            Author: Levionthemic
+
+          <Box sx={{ marginTop: '1em', display: 'flex', justifyContent: 'center', color: theme => theme.palette.mainColor1[400] }}>
+            Quản lí công việc: LeviMana
           </Box>
+
           <Box sx={{ marginTop: '1em', display: 'flex', justifyContent: 'center', flexDirection: 'column', padding: '0 1em' }}>
             {verifiedEmail &&
               <Alert severity="success" sx={{ '.MuiAlert-message': { overflow: 'hidden' } }}>
-                Your email&nbsp;
+                Email &nbsp;
                 <Typography variant="span" sx={{ fontWeight: 'bold', '&:hover': { color: '#fdba26' } }}>{verifiedEmail}</Typography>
-                &nbsp;has been verified.<br />Now you can login to enjoy our services! Have a good day!
+                &nbsp;đã được xác thực.<br />Bây giờ bạn có thể đăng nhập để trải nghiệm dịch vụ của chúng tôi!
               </Alert>
             }
             {registeredEmail &&
               <Alert severity="info" sx={{ '.MuiAlert-message': { overflow: 'hidden' } }}>
-              An email has been sent to&nbsp;
+              Một email đã được gửi đến &nbsp;
                 <Typography variant="span" sx={{ fontWeight: 'bold', '&:hover': { color: '#fdba26' } }}>{registeredEmail}</Typography>
-                <br />Please check and verify your account before logging in!
+                <br />Vui lòng kiểm tra và xác thực trước khi đăng nhập!
               </Alert>
             }
           </Box>
           <Box sx={{ padding: '0 1em 1em 1em' }}>
             <Box sx={{ marginTop: '1em' }}>
               <TextField
-                // autoComplete="nope"
+                autoComplete="nope"
                 autoFocus
                 fullWidth
-                label="Enter Email..."
+                label="Nhập Email..."
                 type="text"
                 variant="outlined"
                 error={!!errors['email']}
+                sx={{ borderRadius: '10px' }}
                 {...register('email', {
                   required: FIELD_REQUIRED_MESSAGE,
                   pattern: {
@@ -93,12 +96,12 @@ function LoginForm() {
                   }
                 })}
               />
-              <FieldErrorAlert errors={errors} fieldName={'email'}/>
+              <FieldErrorAlert errors={errors} fieldName={'email'} />
             </Box>
             <Box sx={{ marginTop: '1em' }}>
               <TextField
                 fullWidth
-                label="Enter Password..."
+                label="Nhập Password..."
                 type="password"
                 variant="outlined"
                 error={!!errors['password']}
@@ -113,22 +116,26 @@ function LoginForm() {
               <FieldErrorAlert errors={errors} fieldName={'password'} />
             </Box>
           </Box>
-          <CardActions sx={{ padding: '0 1em 1em 1em' }}>
+          <CardActions sx={{ padding: '0 1em 1em 1em', my: 2 }}>
             <Button
               className='interceptor-loading'
               type="submit"
               variant="contained"
-              color="primary"
               size="large"
               fullWidth
+              sx={{
+                borderRadius: '999px',
+                bgcolor: (theme) => theme.palette.mainColor1[600],
+                '&:hover': { bgcolor: (theme) => theme.palette.mainColor1[800] }
+              }}
             >
-              Login
+              Đăng nhập
             </Button>
           </CardActions>
           <Box sx={{ padding: '0 1em 1em 1em', textAlign: 'center' }}>
-            <Typography>New to Trello MERN Stack Advanced?</Typography>
+            <Typography>Bạn là người mới?</Typography>
             <Link to="/register" style={{ textDecoration: 'none' }}>
-              <Typography sx={{ color: 'primary.main', '&:hover': { color: '#ffbb39' } }}>Create account!</Typography>
+              <Typography sx={{ color: (theme) => theme.palette.mainColor1[600], '&:hover': { color: '#ffbb39' } }}>Tạo tài khoản!</Typography>
             </Link>
           </Box>
         </MuiCard>

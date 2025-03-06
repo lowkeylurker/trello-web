@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box'
 import AppsIcon from '@mui/icons-material/Apps'
-import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
+import { ReactComponent as LeviManaIcon } from '~/assets/logo.svg'
 import SvgIcon from '@mui/material/SvgIcon'
 import Typography from '@mui/material/Typography'
 import Workspaces from './Menus/Workspaces'
@@ -38,8 +38,8 @@ function AppBar() {
 
         <Link to='/'>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: (theme) => theme.palette.text.main }}>
-            <SvgIcon component={TrelloIcon} fontSize='small' inheritViewBox />
-            <Typography sx={{ fontWeight: 500, fontSize: '1.2rem' }} variant='span'>Trello</Typography>
+            <SvgIcon component={LeviManaIcon} fontSize='small' inheritViewBox />
+            <Typography sx={{ fontWeight: 500, fontSize: '1.2rem' }} variant='span'>LeviMana</Typography>
           </Box>
         </Link>
 

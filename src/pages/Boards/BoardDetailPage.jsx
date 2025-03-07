@@ -21,7 +21,10 @@ import { cloneDeep } from 'lodash'
 import { useParams } from 'react-router-dom'
 import PageLoadingSpinner from '~/components/Loading/PageLoadingSpinner'
 import ActiveCard from '~/components/Modal/ActiveCard/ActiveCard'
-import { Box, Divider, Grid } from '@mui/material'
+import { Box, Divider, Grid, IconButton, Typography } from '@mui/material'
+import { MdSpaceDashboard } from 'react-icons/md'
+import { FaUserFriends } from 'react-icons/fa'
+import { IoMdAdd } from 'react-icons/io'
 
 function BoardDetailPage() {
   const dispatch = useDispatch()
@@ -86,9 +89,10 @@ function BoardDetailPage() {
       sx={{
         height: '100vh',
         width: '100vw',
-        backgroundImage: 'url("../src/assets/bg-board-detail.jpeg")',
+        backgroundImage: 'url("../src/assets/bg-board-detail.jpg")',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
     >
       <ActiveCard />
@@ -96,16 +100,39 @@ function BoardDetailPage() {
       <AppBar />
 
       <Grid container>
-        <Grid item lg={2}>
+        <Grid item lg={1.5}>
           <Box sx={{
-            bgcolor: 'rgba(255, 255, 255, 0.96)',
+            bgcolor: 'rgba(255, 255, 255, 0.85)',
             height: '100%'
           }}>
-            Sidebar
+            <Box sx={{ px: 2, py: 1 }}>
+              <Typography sx={{ fontWeight: '500' }}>Levi Workspace</Typography>
+              <Typography>Free</Typography>
+            </Box>
+
             <Divider />
+
+            <Box sx={{ py: 1 }}>
+              <Box sx={{ px: 2, display: 'flex', alignItems: 'center', gap: 2, cursor: 'pointer', '&:hover': { bgcolor: (theme) => theme.palette.grey[300] }, py: 1/2 }}>
+                <MdSpaceDashboard />
+                <Typography>Boards</Typography>
+              </Box>
+              <Box sx={{ px: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', '&:hover': { bgcolor: (theme) => theme.palette.grey[300] }, py: 1/2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <FaUserFriends />
+                  <Typography>Members</Typography>
+                </Box>
+                <IconButton sx={{ p: 0 }}>
+                  <IoMdAdd/>
+                </IconButton>
+              </Box>
+
+              <Typography sx={{ fontWeight: '500', color: (theme) => theme.palette.text.main, pl: 2, pt: 1 }}>Your boards</Typography>
+
+            </Box>
           </Box>
         </Grid>
-        <Grid item lg={10}>
+        <Grid item lg={10.5}>
           <BoardBar board={board} />
           <BoardContent
             board={board}

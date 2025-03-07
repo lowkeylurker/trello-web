@@ -127,7 +127,7 @@ function Column({ column }) {
           maxWidth: '300px',
           bgcolor: 'rgba(255, 255, 255, 0.8)',
           ml: 2,
-          borderRadius: '20px',
+          borderRadius: '15px',
           height: 'fit-content',
           maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
         }}

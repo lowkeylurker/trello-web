@@ -21,8 +21,9 @@ import { cloneDeep } from 'lodash'
 import { useParams } from 'react-router-dom'
 import PageLoadingSpinner from '~/components/Loading/PageLoadingSpinner'
 import ActiveCard from '~/components/Modal/ActiveCard/ActiveCard'
+import { Box, Divider, Grid } from '@mui/material'
 
-function Board() {
+function BoardDetailPage() {
   const dispatch = useDispatch()
   const board = useSelector(selectCurrentActiveBoard)
 
@@ -79,20 +80,45 @@ function Board() {
   }
 
   return (
-    <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
+    <Container
+      disableGutters
+      maxWidth={false}
+      sx={{
+        height: '100vh',
+        width: '100vw',
+        backgroundImage: 'url("../src/assets/bg-board-detail.jpeg")',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+      }}
+    >
       <ActiveCard />
 
       <AppBar />
-      <BoardBar board={board} />
-      <BoardContent
-        board={board}
 
-        moveColumns={moveColumns}
-        moveCardInTheSameColumn={moveCardInTheSameColumn}
-        moveCardToDifferentColumn={moveCardToDifferentColumn}
-      />
+      <Grid container>
+        <Grid item lg={2}>
+          <Box sx={{
+            bgcolor: 'rgba(255, 255, 255, 0.96)',
+            height: '100%'
+          }}>
+            Sidebar
+            <Divider />
+          </Box>
+        </Grid>
+        <Grid item lg={10}>
+          <BoardBar board={board} />
+          <BoardContent
+            board={board}
+
+            moveColumns={moveColumns}
+            moveCardInTheSameColumn={moveCardInTheSameColumn}
+            moveCardToDifferentColumn={moveCardToDifferentColumn}
+          />
+        </Grid>
+      </Grid>
+
     </Container>
   )
 }
 
-export default Board
+export default BoardDetailPage

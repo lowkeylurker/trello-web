@@ -198,7 +198,7 @@ function ActiveCard() {
           <Grid xs={12} sm={3}>
             <Typography sx={{ fontWeight: '600', color: 'primary.main', mb: 1 }}>Add To Card</Typography>
             <Stack direction="column" spacing={1}>
-              {!activeCard?.memberIds.includes(currentUser._id) &&
+              {!activeCard?.memberIds?.includes(currentUser._id) &&
                 <SidebarItem
                   className="active"
                   onClick={() => onUpdateCardMembers({

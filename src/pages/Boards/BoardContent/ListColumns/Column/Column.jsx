@@ -125,9 +125,9 @@ function Column({ column }) {
         sx={{
           minWidth: '300px',
           maxWidth: '300px',
-          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#333643' : '#ebecf0'),
+          bgcolor: 'rgba(255, 255, 255, 0.8)',
           ml: 2,
-          borderRadius: '6px',
+          borderRadius: '20px',
           height: 'fit-content',
           maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
         }}

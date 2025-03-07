@@ -44,7 +44,8 @@ function Card({ card }) {
         overflow: 'unset',
         border: '1px solid transparent',
         display: card?.FE_PlaceholderCard ? 'none' : 'block',
-        '&:hover': { borderColor: (theme) => theme.palette.primary.main }
+        '&:hover': { borderColor: (theme) => theme.palette.primary.main },
+        borderRadius: '10px'
       }}
       ref={setNodeRef}
       style={dndKitCardStyles}

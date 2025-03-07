@@ -16,7 +16,8 @@ import { Link } from 'react-router-dom'
 import Notifications from './Notifications/Notifications'
 import AutoCompleteSearchBoard from './SearchBoards/AutoCompleteSearchBoard'
 
-function AppBar() {
+// eslint-disable-next-line react/prop-types
+function AppBar({ handleOpenCreateBoardModal }) {
   return (
     <Box px={2} sx={{
       width: '100%',
@@ -27,6 +28,7 @@ function AppBar() {
       gap: 2,
       overflowX: 'auto',
       bgcolor: 'white',
+      opacity: 0.96,
       borderBottom: '1px solid #ddd'
     }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -52,6 +54,7 @@ function AppBar() {
           <Button
             startIcon={<LibraryAddIcon />}
             sx={{ color: (theme) => theme.palette.text.main }}
+            onClick={handleOpenCreateBoardModal}
           >
             Create
           </Button>

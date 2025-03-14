@@ -18,7 +18,7 @@ import Pagination from '@mui/material/Pagination'
 import PaginationItem from '@mui/material/PaginationItem'
 import { Link, useLocation } from 'react-router-dom'
 import randomColor from 'randomcolor'
-import SidebarCreateBoardModal from './create'
+import CreateBoardModal from './CreateBoardModal'
 
 import { styled } from '@mui/material/styles'
 import { fetchBoardsAPI } from '~/apis'
@@ -41,9 +41,18 @@ const SidebarItem = styled(Box)(({ theme }) => ({
   }
 }))
 
-function Boards() {
+function BoardsPage() {
   const [boards, setBoards] = useState(null)
   const [totalBoards, setTotalBoards] = useState(null)
+  const [isOpenCreateBoardModal, setIsOpenCreateBoardModal] = useState(false)
+
+  const handleCloseCreateBoardModal = () => {
+    setIsOpenCreateBoardModal(false)
+  }
+
+  const handleOpenCreateBoardModal = () => {
+    setIsOpenCreateBoardModal(true)
+  }
 
   const location = useLocation()
   const query = new URLSearchParams(location.search)
@@ -68,7 +77,7 @@ function Boards() {
 
   return (
     <>
-      <AppBar />
+      <AppBar handleOpenCreateBoardModal={handleOpenCreateBoardModal} />
       <Container disableGutters maxWidth={'xl'}>
         <Box sx={{ paddingX: 2, my: 4 }}>
           <Grid container spacing={2}>
@@ -89,7 +98,11 @@ function Boards() {
               </Stack>
               <Divider sx={{ my: 1 }} />
               <Stack direction="column" spacing={1}>
-                <SidebarCreateBoardModal afterCreateNewBoard={afterCreateNewBoard} />
+                <CreateBoardModal
+                  openModal={isOpenCreateBoardModal}
+                  afterCreateNewBoard={afterCreateNewBoard}
+                  handleCloseCreateBoardModal={handleCloseCreateBoardModal}
+                />
               </Stack>
             </Grid>
 
@@ -170,4 +183,4 @@ function Boards() {
   )
 }
 
-export default Boards
+export default BoardsPage

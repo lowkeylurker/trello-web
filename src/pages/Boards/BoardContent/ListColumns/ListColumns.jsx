@@ -71,14 +71,15 @@ function ListColumns({ columns }) {
             minWidth: '200px',
             maxWidth: '200px',
             mx: 2,
-            borderRadius: '6px',
+            borderRadius: '15px',
             height: 'fit-content',
-            bgcolor: '#ffffff3d'
+            bgcolor: '#ffffff3d',
+            '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.25)' }
           }}>
             <Button
               startIcon={<NoteAddIcon />}
               sx={{
-                color: 'white',
+                color: (theme) => theme.palette.text.main,
                 width: '100%',
                 justifyContent: 'flex-start',
                 pl: 2.5,
@@ -93,9 +94,9 @@ function ListColumns({ columns }) {
             maxWidth: '250px',
             mx: 2,
             p: 1,
-            borderRadius: '6px',
+            borderRadius: '15px',
             height: 'fit-content',
-            bgcolor: '#ffffff3d',
+            bgcolor: 'rgba(255, 255, 255, 0.8)',
             display: 'flex',
             flexDirection: 'column',
             gap: 1
@@ -109,13 +110,13 @@ function ListColumns({ columns }) {
               value={newColumnTitle}
               onChange={(e) => setNewColumnTitle(e.target.value)}
               sx={{
-                '& label': { color: 'white' },
-                '& input': { color: 'white' },
-                '& label.Mui-focused': { color: 'white' },
+                '& label': { color: 'black' },
+                '& input': { color: 'black' },
+                '& label.Mui-focused': { color: 'black' },
                 '& .MuiOutlinedInput-root': {
-                  '& fieldset': { borderColor: 'white' },
-                  '&:hover fieldset': { borderColor: 'white' },
-                  '&.Mui-focused fieldset': { borderColor: 'white' }
+                  '& fieldset': { borderColor: 'black' },
+                  '&:hover fieldset': { borderColor: 'black' },
+                  '&.Mui-focused fieldset': { borderColor: 'black' }
                 }
               }}
             />
@@ -138,7 +139,7 @@ function ListColumns({ columns }) {
               <CloseIcon
                 fontSize='small'
                 sx={{
-                  color: 'white',
+                  color: 'black',
                   cursor: 'pointer',
                   '&:hover': { color: (theme) => theme.palette.warning.light }
                 }}

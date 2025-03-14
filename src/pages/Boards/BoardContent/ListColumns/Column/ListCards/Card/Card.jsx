@@ -41,10 +41,11 @@ function Card({ card }) {
       sx={{
         cursor: 'pointer',
         boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
-        overflow: 'unset',
+        overflow: 'hidden',
         border: '1px solid transparent',
         display: card?.FE_PlaceholderCard ? 'none' : 'block',
-        '&:hover': { borderColor: (theme) => theme.palette.primary.main }
+        '&:hover': { borderColor: (theme) => theme.palette.primary.main },
+        borderRadius: '10px'
       }}
       ref={setNodeRef}
       style={dndKitCardStyles}

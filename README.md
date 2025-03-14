@@ -1,5 +1,5 @@
-# Trello Clone
-A small web application that cloned Trello. 
+# Work Management
+A small work management web application. 
 
 # Tech Stack
 - FE: ReactJS + Material UI. Drag/drop with Dndkit.

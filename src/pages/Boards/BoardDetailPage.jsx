@@ -25,6 +25,7 @@ import { Box, Divider, Grid, IconButton, Typography } from '@mui/material'
 import { MdSpaceDashboard } from 'react-icons/md'
 import { FaUserFriends } from 'react-icons/fa'
 import { IoMdAdd } from 'react-icons/io'
+import bgImg from '~/assets/bg-board-detail.jpg'
 
 function BoardDetailPage() {
   const dispatch = useDispatch()
@@ -89,7 +90,7 @@ function BoardDetailPage() {
       sx={{
         height: '100vh',
         width: '100vw',
-        backgroundImage: 'url("../src/assets/bg-board-detail.jpg")',
+        backgroundImage: `url(${bgImg})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center'

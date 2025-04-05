@@ -101,7 +101,7 @@ function BoardDetailPage() {
       <AppBar />
 
       <Grid container>
-        <Grid item lg={1.5}>
+        <Grid item lg={2} md={2} sm={2}>
           <Box sx={{
             bgcolor: 'rgba(255, 255, 255, 0.85)',
             height: '100%'
@@ -133,7 +133,7 @@ function BoardDetailPage() {
             </Box>
           </Box>
         </Grid>
-        <Grid item lg={10.5}>
+        <Grid item lg={10} md={10} sm={10}>
           <BoardBar board={board} />
           <BoardContent
             board={board}

@@ -79,7 +79,7 @@ function BoardsPage() {
     <>
       <AppBar handleOpenCreateBoardModal={handleOpenCreateBoardModal} />
       <Container disableGutters maxWidth={'xl'}>
-        <Box sx={{ paddingX: 2, my: 4 }}>
+        <Box sx={{ px: 2, my: 4 }}>
           <Grid container spacing={2}>
             <Grid xs={12} sm={2.5}>
               <Stack direction="column" spacing={1}>
@@ -159,7 +159,7 @@ function BoardsPage() {
               <Box sx={{ my: 3, pr: 5, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
                 <Pagination
                   size="large"
-                  color="secondary"
+                  color="primary"
                   showFirstButton
                   showLastButton
                   count={Math.ceil(totalBoards / DEFAULT_ITEMS_PER_PAGE)}
@@ -169,6 +169,13 @@ function BoardsPage() {
                       component={Link}
                       to={`/boards${item.page === DEFAULT_PAGE ? '' : `?page=${item.page}`}`}
                       {...item}
+                      sx={{
+                        height: '20px',
+                        width: 'fit-content',
+                        minWidth: '20px',
+                        aspectRatio: '1/1',
+                        p: 1.5
+                      }}
                     />
                   )}
                 />

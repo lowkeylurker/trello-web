@@ -12,7 +12,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
 
 import { FIELD_REQUIRED_MESSAGE, singleFileValidator } from '~/utils/validators'
-import FieldErrorAlert from '~/components/Form/FieldErrorAlert'
+import FieldErrorAlert from '~/components/Form/FormMessage'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentUser, updateUserAPI } from '~/redux/user/userSlice'
 import { useForm } from 'react-hook-form'

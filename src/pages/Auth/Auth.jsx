@@ -20,15 +20,14 @@ function Auth() {
   return (
     <Box sx={{
       display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh',
       alignItems: 'center',
       justifyContent: 'center',
+      height: '100vh',
       backgroundImage: `url(${bgImg})`,
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'contain',
       backgroundPosition: 'center',
-      boxShadow: 'inset 0 0 0 2000px rgba(0, 0, 0, 0.2)'
+      boxShadow: 'inset 0 0 0 2000px rgba(0, 0, 0, 0.5)'
     }}>
       {isLogin && <LoginForm />}
       {isRegister && <RegisterForm />}

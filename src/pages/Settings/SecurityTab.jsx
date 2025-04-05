@@ -9,7 +9,7 @@ import LockIcon from '@mui/icons-material/Lock'
 import LogoutIcon from '@mui/icons-material/Logout'
 
 import { FIELD_REQUIRED_MESSAGE, PASSWORD_RULE, PASSWORD_RULE_MESSAGE } from '~/utils/validators'
-import FieldErrorAlert from '~/components/Form/FieldErrorAlert'
+import FieldErrorAlert from '~/components/Form/FormMessage'
 import { useForm } from 'react-hook-form'
 import { useConfirm } from 'material-ui-confirm'
 import { toast } from 'react-toastify'

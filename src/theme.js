@@ -8,7 +8,7 @@ const COLUMN_HEADER_HEIGHT = '50px'
 const COLUMN_FOOTER_HEIGHT = '56px'
 
 const theme = extendTheme({
-  trello: {
+  levimana: {
     appBarHeight: APP_BAR_HEIGHT,
     boardBarHeight: BOARD_BAR_HEIGHT,
     boardContentHeight: BOARD_CONTENT_HEIGHT,
@@ -18,6 +18,7 @@ const theme = extendTheme({
   colorSchemes: {
     light: {
       palette: {
+        primary: { main: '#464B9F' },
         background: { main: 'white' },
         text: { main: '#172B4D' },
         mainColor1: {
@@ -36,6 +37,21 @@ const theme = extendTheme({
     },
     dark: {
       palette: {
+        primary: { main: '#464B9F' },
+        background: { main: 'white' },
+        text: { main: '#172B4D' },
+        mainColor1: {
+  				'100': '#9595C9',
+  				'200': '#8786C0',
+  				'400': '#6666AE',
+  				'600': '#464B9F',
+  				'800': '#2F2F89'
+  			},
+  			mainColor2: {
+  				'100': '#CEACD1',
+  				'300': '#C29BC8',
+  				'800': '#854C9D'
+  			}
       }
     }
   },
@@ -44,15 +60,16 @@ const theme = extendTheme({
       styleOverrides: {
         body: {
           '*::-webkit-scrollbar': {
-            width: '8px',
-            height: '8px'
+            width: '4px',
+            height: '4px'
           },
           '*::-webkit-scrollbar-thumb': {
-            backgroundColor: '#dcdde1',
+            backgroundColor: '#ddd',
             borderRadius: '8px'
           },
           '*::-webkit-scrollbar-thumb:hover': {
-            backgroundColor: 'white'
+            backgroundColor: '#ddd',
+            cursor: 'pointer'
           }
         }
       }

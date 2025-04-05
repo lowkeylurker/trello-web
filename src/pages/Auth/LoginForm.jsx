@@ -18,13 +18,26 @@ import {
   PASSWORD_RULE_MESSAGE,
   EMAIL_RULE_MESSAGE
 } from '~/utils/validators'
-import FieldErrorAlert from '~/components/Form/FieldErrorAlert'
+import FormMessage from '~/components/Form/FormMessage'
 import { useDispatch } from 'react-redux'
 import { loginUserAPI } from '~/redux/user/userSlice'
 import { toast } from 'react-toastify'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 function LoginForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const formSchema = z.object({
+    email: z.string().min(1, { message: FIELD_REQUIRED_MESSAGE }).regex(EMAIL_RULE, { message: EMAIL_RULE_MESSAGE }),
+    password: z.string().min(1, { message: FIELD_REQUIRED_MESSAGE }).regex(PASSWORD_RULE, { message: PASSWORD_RULE_MESSAGE })
+  }).required()
+
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  })
 
   const [searchParams] = useSearchParams()
   const registeredEmail = searchParams.get('registeredEmail')
@@ -45,8 +58,8 @@ function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit(submitLogIn)}>
-      <Zoom in={true} style={{ transitionDelay: '200ms' }}>
-        <MuiCard sx={{ minWidth: 380, maxWidth: 380 }}>
+      <Zoom in={true} style={{ transitionDelay: '500ms' }}>
+        <MuiCard sx={{ minWidth: 380, maxWidth: 380, backdropFilter: 'blur(5px)', bgcolor: 'rgba(255, 255, 255, 0.9)' }}>
           <Box sx={{
             margin: '1em',
             display: 'flex',
@@ -57,8 +70,9 @@ function LoginForm() {
             <Avatar sx={{ bgcolor: 'transparent' }}><TrelloIcon /></Avatar>
           </Box>
 
-          <Box sx={{ marginTop: '1em', display: 'flex', justifyContent: 'center', color: theme => theme.palette.mainColor1[400] }}>
-            Quản lí công việc: LeviMana
+          <Box sx={{ mt: 3, mb: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: theme => theme.palette.mainColor1[400] }}>
+            <Typography>Task Management</Typography>
+            <Typography variant='h4'>LeviMana</Typography>
           </Box>
 
           <Box sx={{ marginTop: '1em', display: 'flex', justifyContent: 'center', flexDirection: 'column', padding: '0 1em' }}>
@@ -66,14 +80,14 @@ function LoginForm() {
               <Alert severity="success" sx={{ '.MuiAlert-message': { overflow: 'hidden' } }}>
                 Email &nbsp;
                 <Typography variant="span" sx={{ fontWeight: 'bold', '&:hover': { color: '#fdba26' } }}>{verifiedEmail}</Typography>
-                &nbsp;đã được xác thực.<br />Bây giờ bạn có thể đăng nhập để trải nghiệm dịch vụ của chúng tôi!
+                &nbsp;has been verified!.<br />Now you can login to enjoy our service!
               </Alert>
             }
             {registeredEmail &&
               <Alert severity="info" sx={{ '.MuiAlert-message': { overflow: 'hidden' } }}>
-              Một email đã được gửi đến &nbsp;
+              An email has been sent to &nbsp;
                 <Typography variant="span" sx={{ fontWeight: 'bold', '&:hover': { color: '#fdba26' } }}>{registeredEmail}</Typography>
-                <br />Vui lòng kiểm tra và xác thực trước khi đăng nhập!
+                <br />Please check your email and verify before login!
               </Alert>
             }
           </Box>
@@ -83,37 +97,25 @@ function LoginForm() {
                 autoComplete="nope"
                 autoFocus
                 fullWidth
-                label="Nhập Email..."
+                label="Email..."
                 type="text"
                 variant="outlined"
                 error={!!errors['email']}
                 sx={{ borderRadius: '10px' }}
-                {...register('email', {
-                  required: FIELD_REQUIRED_MESSAGE,
-                  pattern: {
-                    value: EMAIL_RULE,
-                    message: EMAIL_RULE_MESSAGE
-                  }
-                })}
+                {...register('email')}
               />
-              <FieldErrorAlert errors={errors} fieldName={'email'} />
+              <FormMessage errors={errors} fieldName={'email'} />
             </Box>
             <Box sx={{ marginTop: '1em' }}>
               <TextField
                 fullWidth
-                label="Nhập Password..."
+                label="Password..."
                 type="password"
                 variant="outlined"
                 error={!!errors['password']}
-                {...register('password', {
-                  required: PASSWORD_RULE_MESSAGE,
-                  pattern: {
-                    value: PASSWORD_RULE,
-                    message: PASSWORD_RULE_MESSAGE
-                  }
-                })}
+                {...register('password')}
               />
-              <FieldErrorAlert errors={errors} fieldName={'password'} />
+              <FormMessage errors={errors} fieldName={'password'} />
             </Box>
           </Box>
           <CardActions sx={{ padding: '0 1em 1em 1em', my: 2 }}>
@@ -129,13 +131,13 @@ function LoginForm() {
                 '&:hover': { bgcolor: (theme) => theme.palette.mainColor1[800] }
               }}
             >
-              Đăng nhập
+              Login
             </Button>
           </CardActions>
           <Box sx={{ padding: '0 1em 1em 1em', textAlign: 'center' }}>
-            <Typography>Bạn là người mới?</Typography>
+            <Typography>New member?</Typography>
             <Link to="/register" style={{ textDecoration: 'none' }}>
-              <Typography sx={{ color: (theme) => theme.palette.mainColor1[600], '&:hover': { color: '#ffbb39' } }}>Tạo tài khoản!</Typography>
+              <Typography variant='span' sx={{ color: (theme) => theme.palette.mainColor1[600], '&:hover': { color: '#ffbb39' } }}>Register!</Typography>
             </Link>
           </Box>
         </MuiCard>

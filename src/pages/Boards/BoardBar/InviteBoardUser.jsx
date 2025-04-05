@@ -9,7 +9,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import TextField from '@mui/material/TextField'
 import { useForm } from 'react-hook-form'
 import { EMAIL_RULE, FIELD_REQUIRED_MESSAGE, EMAIL_RULE_MESSAGE } from '~/utils/validators'
-import FieldErrorAlert from '~/components/Form/FieldErrorAlert'
+import FieldErrorAlert from '~/components/Form/FormMessage'
 import { inviteUserToBoardAPI } from '~/apis'
 import { socketIoInstance } from '~/socketClient'
 

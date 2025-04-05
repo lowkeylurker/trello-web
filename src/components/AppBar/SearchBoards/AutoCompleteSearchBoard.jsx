@@ -68,28 +68,28 @@ function AutoCompleteSearchBoard() {
             ...params.InputProps,
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon sx={{ color: (theme) => theme.palette.text.main }} />
+                <SearchIcon sx={{ color: (theme) => theme.palette.mainColor1[600] }} />
               </InputAdornment>
             ),
             endAdornment: (
               <>
                 {loading ?
-                  <CircularProgress sx={{ color: (theme) => theme.palette.text.main }} size={20} /> : null
+                  <CircularProgress sx={{ color: (theme) => theme.palette.mainColor1[600] }} size={20} /> : null
                 }
                 {params.InputProps.endAdornment}
               </>
             )
           }}
           sx={{
-            '& label': { color: (theme) => theme.palette.text.main },
-            '& input': { color: (theme) => theme.palette.text.main },
-            '& label.Mui-focused': { color: (theme) => theme.palette.text.main },
+            '& label': { color: (theme) => theme.palette.mainColor1[600] },
+            '& input': { color: (theme) => theme.palette.mainColor1[600] },
+            '& label.Mui-focused': { color: (theme) => theme.palette.mainColor1[600] },
             '& .MuiOutlinedInput-root': {
-              '& fieldset': { borderColor: (theme) => theme.palette.text.main },
-              '&:hover fieldset': { borderColor: (theme) => theme.palette.text.main },
-              '&.Mui-focused fieldset': { borderColor: (theme) => theme.palette.text.main }
+              '& fieldset': { borderColor: (theme) => theme.palette.mainColor1[600] },
+              '&:hover fieldset': { borderColor: (theme) => theme.palette.mainColor1[600] },
+              '&.Mui-focused fieldset': { borderColor: (theme) => theme.palette.mainColor1[600] }
             },
-            '.MuiSvgIcon-root': { color: (theme) => theme.palette.text.main }
+            '.MuiSvgIcon-root': { color: (theme) => theme.palette.mainColor1[600] }
           }}
         />
       )}

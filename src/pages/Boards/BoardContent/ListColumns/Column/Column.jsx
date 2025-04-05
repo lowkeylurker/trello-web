@@ -129,11 +129,11 @@ function Column({ column }) {
           ml: 2,
           borderRadius: '15px',
           height: 'fit-content',
-          maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
+          maxHeight: (theme) => `calc(${theme.levimana.boardContentHeight} - ${theme.spacing(5)})`
         }}
       >
         <Box sx={{
-          height: (theme) => theme.trello.columnHeaderHeight,
+          height: (theme) => theme.levimana.columnHeaderHeight,
           p: 2,
           display: 'flex',
           alignItems: 'center',
@@ -215,7 +215,7 @@ function Column({ column }) {
         <ListCards cards={orderedCards} />
 
         <Box sx={{
-          height: (theme) => theme.trello.columnFooterHeight,
+          height: (theme) => theme.levimana.columnFooterHeight,
           p: 2
         }}>
           {!openNewCardForm
